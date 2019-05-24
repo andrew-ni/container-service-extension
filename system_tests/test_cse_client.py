@@ -317,8 +317,8 @@ def test_0040_vcd_cse_cluster_and_node_operations(config, vcd_org_admin,
             cmds = [
                 f"cse cluster config {env.TEST_CLUSTER_NAME}",
                 f"cse cluster info {env.TEST_CLUSTER_NAME}",
-                f"cse cluster list",
-                f"cse node info {env.TEST_CLUSTER_NAME} {nodes[0]}"
+                f"cse cluster list"
+                # f"cse node info {env.TEST_CLUSTER_NAME} {nodes[0]}"
             ]
             for cmd in cmds:
                 print(f"Running command [vcd {cmd}]...", end='')
