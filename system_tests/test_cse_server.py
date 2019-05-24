@@ -281,10 +281,6 @@ def test_0080_install_no_capture(config, blank_cust_scripts, unregister_cse):
                                    catch_exceptions=False)
     assert result.exit_code == 0
 
-    # check that cse was registered correctly
-    env.check_cse_registration(config['amqp']['routing_key'],
-                               config['amqp']['exchange'])
-
     # check that source ova file exists in catalog
     assert env.catalog_item_exists(template_config['source_ova_name']), \
         'Source ova file does not exist when it should.'
@@ -296,6 +292,10 @@ def test_0080_install_no_capture(config, blank_cust_scripts, unregister_cse):
     # check that temp vapp exists (--no-capture)
     assert env.vapp_exists(template_config['temp_vapp']), \
         'vApp does not exist when it should (--no-capture).'
+
+    # check that cse was registered correctly
+    env.check_cse_registration(config['amqp']['routing_key'],
+                               config['amqp']['exchange'])
 
 
 def test_0090_install_temp_vapp_already_exists(config, blank_cust_scripts,
@@ -326,10 +326,6 @@ def test_0090_install_temp_vapp_already_exists(config, blank_cust_scripts,
                                    catch_exceptions=False)
     assert result.exit_code == 0
 
-    # check that cse was registered correctly
-    env.check_cse_registration(config['amqp']['routing_key'],
-                               config['amqp']['exchange'])
-
     # check that vapp template exists in catalog
     assert env.catalog_item_exists(template_config['catalog_item']), \
         'vApp template does not exist when it should.'
@@ -337,6 +333,10 @@ def test_0090_install_temp_vapp_already_exists(config, blank_cust_scripts,
     # check that temp vapp exists (cleanup: false)
     assert env.vapp_exists(template_config['temp_vapp']), \
         'vApp does not exist when it should (cleanup: false).'
+
+    # check that cse was registered correctly
+    env.check_cse_registration(config['amqp']['routing_key'],
+                               config['amqp']['exchange'])
 
 
 def test_0100_install_update(config, unregister_cse):
@@ -363,10 +363,6 @@ def test_0100_install_update(config, unregister_cse):
     assert result.exit_code == 0
 
     vdc = VDC(env.CLIENT, href=env.VDC_HREF)
-
-    # check that cse was registered correctly
-    env.check_cse_registration(config['amqp']['routing_key'],
-                               config['amqp']['exchange'])
 
     # ssh into vms to check for installed software
     ssh_client = paramiko.SSHClient()
@@ -410,6 +406,10 @@ def test_0100_install_update(config, unregister_cse):
         finally:
             ssh_client.close()
 
+    # check that cse was registered correctly
+    env.check_cse_registration(config['amqp']['routing_key'],
+                               config['amqp']['exchange'])
+
 
 def test_0110_install_cleanup_true(config, blank_cust_scripts, unregister_cse):
     """Tests that installation deletes temp vapps when 'cleanup' is True.
@@ -428,10 +428,6 @@ def test_0110_install_cleanup_true(config, blank_cust_scripts, unregister_cse):
                                    catch_exceptions=False)
     assert result.exit_code == 0
 
-    # check that cse was registered correctly
-    env.check_cse_registration(config['amqp']['routing_key'],
-                               config['amqp']['exchange'])
-
     for template_config in config['broker']['templates']:
         # check that vapp templates exists
         assert env.catalog_item_exists(template_config['catalog_item']), \
@@ -440,6 +436,10 @@ def test_0110_install_cleanup_true(config, blank_cust_scripts, unregister_cse):
         # check that temp vapps do not exist (cleanup: true)
         assert not env.vapp_exists(template_config['temp_vapp']), \
             'Temp vapp exists when it should not (cleanup: True).'
+
+    # check that cse was registered correctly
+    env.check_cse_registration(config['amqp']['routing_key'],
+                               config['amqp']['exchange'])
 
 
 def test_0120_cse_check_valid_installation(config):
