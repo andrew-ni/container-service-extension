@@ -96,7 +96,7 @@ def cse_server():
     cmd = f"cse run -c {env.ACTIVE_CONFIG_FILEPATH}"
     p = subprocess.Popen(cmd.split(), stdout=subprocess.DEVNULL,
                          stderr=subprocess.STDOUT)
-    time.sleep(env.WAIT_INTERVAL)  # server takes a little time to set up
+    time.sleep(env.WAIT_INTERVAL * 10)  # server takes a little time to set up
 
     # enable kubernetes functionality on our ovdc
     # by default, an ovdc cannot deploy kubernetes clusters
@@ -104,16 +104,20 @@ def cse_server():
     cmd = f"login {config['vcd']['host']} {utils.SYSTEM_ORG_NAME} " \
           f"{config['vcd']['username']} -iwp {config['vcd']['password']}"
     result = env.CLI_RUNNER.invoke(vcd, cmd.split(), catch_exceptions=False)
+    print(f"{cmd} [{result.exit_code}]")
     assert result.exit_code == 0
     cmd = f"org use {config['broker']['org']}"
     result = env.CLI_RUNNER.invoke(vcd, cmd.split(), catch_exceptions=False)
+    print(f"{cmd} [{result.exit_code}]")
     assert result.exit_code == 0
     cmd = f"vdc use {config['broker']['vdc']}"
     result = env.CLI_RUNNER.invoke(vcd, cmd.split(), catch_exceptions=False)
+    print(f"{cmd} [{result.exit_code}]")
     assert result.exit_code == 0
     cmd = f"cse ovdc enable {config['broker']['vdc']} -k " \
           f"{constants.K8sProviders.NATIVE}"
     result = env.CLI_RUNNER.invoke(vcd, cmd.split(), catch_exceptions=False)
+    print(f"{cmd} [{result.exit_code}]")
     assert result.exit_code == 0
     result = env.CLI_RUNNER.invoke(vcd, 'logout', catch_exceptions=False)
     assert result.exit_code == 0
