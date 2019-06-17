@@ -101,26 +101,26 @@ def cse_server():
     # enable kubernetes functionality on our ovdc
     # by default, an ovdc cannot deploy kubernetes clusters
     # TODO() this should be removed once this behavior is changed
-    cmd = f"login {config['vcd']['host']} {utils.SYSTEM_ORG_NAME} " \
-          f"{config['vcd']['username']} -iwp {config['vcd']['password']}"
-    result = env.CLI_RUNNER.invoke(vcd, cmd.split(), catch_exceptions=False)
-    print(f"{cmd} [{result.exit_code}]")
-    assert result.exit_code == 0
-    cmd = f"org use {config['broker']['org']}"
-    result = env.CLI_RUNNER.invoke(vcd, cmd.split(), catch_exceptions=False)
-    print(f"{cmd} [{result.exit_code}]")
-    assert result.exit_code == 0
-    cmd = f"vdc use {config['broker']['vdc']}"
-    result = env.CLI_RUNNER.invoke(vcd, cmd.split(), catch_exceptions=False)
-    print(f"{cmd} [{result.exit_code}]")
-    assert result.exit_code == 0
-    cmd = f"cse ovdc enable {config['broker']['vdc']} -k " \
-          f"{constants.K8sProviders.NATIVE}"
-    result = env.CLI_RUNNER.invoke(vcd, cmd.split(), catch_exceptions=False)
-    print(f"{cmd} [{config['broker']['vdc']}] [{constants.K8sProviders.NATIVE}] [{result.exit_code}]")
-    assert result.exit_code == 0
-    result = env.CLI_RUNNER.invoke(vcd, 'logout', catch_exceptions=False)
-    assert result.exit_code == 0
+    # cmd = f"login {config['vcd']['host']} {utils.SYSTEM_ORG_NAME} " \
+    #       f"{config['vcd']['username']} -iwp {config['vcd']['password']}"
+    # result = env.CLI_RUNNER.invoke(vcd, cmd.split(), catch_exceptions=False)
+    # print(f"{cmd} [{result.exit_code}]")
+    # assert result.exit_code == 0
+    # cmd = f"org use {config['broker']['org']}"
+    # result = env.CLI_RUNNER.invoke(vcd, cmd.split(), catch_exceptions=False)
+    # print(f"{cmd} [{result.exit_code}]")
+    # assert result.exit_code == 0
+    # cmd = f"vdc use {config['broker']['vdc']}"
+    # result = env.CLI_RUNNER.invoke(vcd, cmd.split(), catch_exceptions=False)
+    # print(f"{cmd} [{result.exit_code}]")
+    # assert result.exit_code == 0
+    # cmd = f"cse ovdc enable {config['broker']['vdc']} -k " \
+    #       f"{constants.K8sProviders.NATIVE}"
+    # result = env.CLI_RUNNER.invoke(vcd, cmd.split(), catch_exceptions=False)
+    # print(f"{cmd} [{config['broker']['vdc']}] [{constants.K8sProviders.NATIVE}] [{result.exit_code}]")
+    # assert result.exit_code == 0
+    # result = env.CLI_RUNNER.invoke(vcd, 'logout', catch_exceptions=False)
+    # assert result.exit_code == 0
 
     yield
 
