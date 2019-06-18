@@ -109,7 +109,7 @@ def cse_server():
 
     # ensure that `~/.vcd-cli/profiles.yaml` has the required CSE info
     cse_ext_msg = 'extensions:\n- container_service_extension.client.cse\n'
-    profiles_file = pathlib.Path('~/.vcd-cli/profiles.yaml')
+    profiles_file = pathlib.Path.home() / '.vcd-cli' / 'profiles.yaml'
     profiles_content = profiles_file.read_text()
     if 'container_service_extension.client.cse' not in profiles_content:
         profiles_file.write_text(f"{cse_ext_msg}{profiles_content}")
