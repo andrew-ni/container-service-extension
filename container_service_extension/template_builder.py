@@ -190,10 +190,10 @@ class TemplateBuilder():
 
         :rtype: str
         """
-        init_sctipt_filepath = get_local_script_filepath(
+        init_script_filepath = get_local_script_filepath(
             self.template_name, self.template_revision, ScriptFile.INIT)
         init_script = read_data_file(
-            init_sctipt_filepath, logger=self.logger,
+            init_script_filepath, logger=self.logger,
             msg_update_callback=self.msg_update_callback)
         if self.ssh_key is not None:
             init_script += \
