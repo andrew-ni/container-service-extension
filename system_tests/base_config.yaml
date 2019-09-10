@@ -50,7 +50,7 @@ service:
 
 broker:
   catalog: cse                          # public shared catalog within org where the template will be published
-  default_template_name: ubuntu-16.04_esspks-1.15_weave-2.5.2
+  default_template_name: ubuntu-16.04_k8-1.13_weave-2.3.0
                                         # name of the default template to use if none is specified
   default_template_revision: 1          # revision of the default template to use if none is specified
   ip_allocation_mode: pool              # dhcp or pool
