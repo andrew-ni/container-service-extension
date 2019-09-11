@@ -394,7 +394,7 @@ def test_0090_install_retain_temp_vapp(config, unregister_cse_before_test):
                 installed = [line.strip() for line in stdout]
                 for package in packages:
                     assert package in installed, \
-                        f"{package} not found in Ubuntu VM"
+                        f"{package} not found in Ubuntu VM's packages: {installed}"
         finally:
             if ssh_client:
                 ssh_client.close()
