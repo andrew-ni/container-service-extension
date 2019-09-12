@@ -25,7 +25,7 @@
 ## Creating Essential-PKS Kubernetes vApp Template using CSE
 
 1. In CSE config file, change the value of the key `remote_template_cookbook_url` to  `https://raw.githubusercontent.com/vmware/container-service-extension-templates/essential-pks/template.yaml`
-2. Create Essential-PKS K8s templates using CSE following one of the below methods
+2. Create Essential-PKS K8s template using CSE following one of the below methods
    - ```$ cse install -c myconfig.yaml```
    - ```$ cse template install -c myconfig.yaml ubuntu-16.04_esspks-1.15_weave-2.5.2 1``` (*1 is the template revision number*)
 3. In the vCD catalog specified in the CSE config file, you should see the essential-pks Kubernetes template as a catalog item named **ubuntu-16.04_esspks-1.15_weave-2.5.2_rev1**. Users can now use CSE's `vcd cse cluster create` command to create clusters.
