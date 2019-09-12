@@ -24,18 +24,17 @@
 
 ## Creating Essential-PKS Kubernetes vApp Template using CSE
 
-1. In CSE config file, change the value of the key `remote_template_cookbook_url` to  https://raw.githubusercontent.com/vmware/container-service-extension-templates/essential-pks/template.yaml
+1. In CSE config file, change the value of the key `remote_template_cookbook_url` to  `https://raw.githubusercontent.com/vmware/container-service-extension-templates/essential-pks/template.yaml`
 2. Create Essential-PKS K8s templates using CSE following one of the below methods
    - ```$ cse install -c myconfig.yaml```
-   - ```$ cse template install -c myconfig.yaml ubuntu-16.04_esspks-1.15_weave-2.5.2 1```
-        *1 is the template revision number*
-3. In the vCD catalog specified in the CSE config file, you should see the essential-pks Kubernetes template as a catalog item named **ubuntu-16.04_esspks-1.15_weave-2.5.2_rev1**. Essential PKS clusters can now be created using CSE's `vcd cse cluster create` command.
+   - ```$ cse template install -c myconfig.yaml ubuntu-16.04_esspks-1.15_weave-2.5.2 1``` (*1 is the template revision number*)
+3. In the vCD catalog specified in the CSE config file, you should see the essential-pks Kubernetes template as a catalog item named **ubuntu-16.04_esspks-1.15_weave-2.5.2_rev1**. Users can now use CSE's `vcd cse cluster create` command to create clusters.
 
 ---
 
 ## Protecting Essential-PKS Template
 
-CSE templates are protected via **vCD compute policy**. If a CSE template has a compute policy and the org VDC that a user is trying to deploy to does not have that specific compute policy assigned to it, then the deployment will fail. Essential-PKS templates have a default compute policy named **essential-pks**.
+CSE templates are protected via **vCD compute policy**. If a CSE template has a compute policy and the org VDC that a user is trying to deploy to does not have that specific compute policy assigned to it, then the deployment will fail. Essential-PKS template has a default compute policy named **essential-pks**.
 
 ### Enabling/Disabling Deployment of Essential-PKS Clusters
 
