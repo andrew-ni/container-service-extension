@@ -13,7 +13,7 @@
 | ubuntu-16.04_esspks-1.15_weave-2.5.2 | Revision 1 (latest)                                                                                             |
 | ------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
 | Ubuntu                               | 16.04 (https://cloud-images.ubuntu.com/releases/xenial/release-20180418/ubuntu-16.04-server-cloudimg-amd64.ova) |
-| Docker                               | 18.09.7 (docker-ce=5:18.09.7~3-0~ubuntu-xenial)                                                                 |
+| Docker                               | 18.09.7 (docker-ce=5:18.09.7\~3-0\~ubuntu-xenial)                                                                 |
 | Kubernetes                           | [Essential PKS Kubernetes 1.15.3](https://hub.heptio.com/releases/1-15-release/#1-15-3)                         |
 | Weave (cluster CNI)                  | [2.5.2](https://www.weave.works/docs/net/latest/overview/)                                                      |
 | Default compute policy name          | essential-pks                                                                                                   |
