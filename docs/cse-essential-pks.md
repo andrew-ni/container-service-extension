@@ -1,14 +1,14 @@
-# CSE and Essential PKS
+# Enabling VMware Essential PKS in Container Service Extension
 
-## CSE Reference Links
+## Container Service Extension (CSE) Reference Links
 
-- [CSE official docs](https://vmware.github.io/container-service-extension/INTRO.html)
-- [CSE on pypi](https://pypi.org/project/container-service-extension/)
-- [CSE Github](https://github.com/vmware/container-service-extension)
+- [Container Service Extension official docs](https://vmware.github.io/container-service-extension/INTRO.html)
+- [Container Service Extension on pypi](https://pypi.org/project/container-service-extension/)
+- [Container Service Extension Github](https://github.com/vmware/container-service-extension)
 
 ---
 
-## Essential-PKS Template Details
+## Essential PKS Template Details
 
 | ubuntu-16.04_esspks-1.15_weave-2.5.2 | Revision 1 (latest)                                                                                             |
 | ------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
@@ -22,21 +22,25 @@
 
 ---
 
-## Creating Essential-PKS Kubernetes vApp Template using CSE
+## Creating Essential PKS Kubernetes Template using CSE
 
-1. In CSE config file, change the value of the key `remote_template_cookbook_url` to  `https://raw.githubusercontent.com/vmware/container-service-extension-templates/essential-pks/template.yaml`
-2. Create Essential-PKS K8s template using CSE following one of the below methods
-   - ```$ cse install -c myconfig.yaml```
-   - ```$ cse template install -c myconfig.yaml ubuntu-16.04_esspks-1.15_weave-2.5.2 1``` (*1 is the template revision number*)
-3. In the vCD catalog specified in the CSE config file, you should see the essential-pks Kubernetes template as a catalog item named **ubuntu-16.04_esspks-1.15_weave-2.5.2_rev1**. Users can now use CSE's `vcd cse cluster create` command to create clusters.
+*A CSE config file should be created and should contain your vCloud Director details. More CSE config file details can be found [HERE](https://vmware.github.io/container-service-extension/CSE_ADMIN.html#configfile)*
+
+1. In the CSE config file, change the value of the key `remote_template_cookbook_url` to  `https://raw.githubusercontent.com/vmware/container-service-extension-templates/essential-pks/template.yaml`
+2. Use CSE's command-line interface to create Essential PKS K8s template on vCloud Director
+   - Installing (or re-installing) CSE on vCloud Director will create any new templates if they are specified in the CSE config file
+     ```$ cse install -c path/to/myconfig.yaml```
+   - CSE's template installation command can be used to create new templates once CSE is already installed on vCloud Director
+     ```$ cse template install -c myconfig.yaml ubuntu-16.04_esspks-1.15_weave-2.5.2 1``` (*1 is the template revision number*)
+3. In the vCloud Director organization specified in the CSE config file, you should see the Essential PKS Kubernetes template (**ubuntu-16.04_esspks-1.15_weave-2.5.2_rev1**) in the catalog (also specified in the CSE config file). Users can now use CSE's `vcd cse cluster create` command to create clusters.
 
 ---
 
-## Protecting Essential-PKS Template
+## Protecting Essential PKS Template
 
-CSE templates are protected via **vCD compute policy**. If a CSE template has a compute policy and the org VDC that a user is trying to deploy to does not have that specific compute policy assigned to it, then the deployment will fail. Essential-PKS template has a default compute policy named **essential-pks**.
+Essential PKS template has a default compute policy named **essential-pks**. Users will not be able to deploy templates to org VDCs that do not have the specified compute policy assigned. System administrators can assign compute policies to org VDCs via CSE's command-line interface. More information on how CSE uses compute policies can be found [HERE](TODO)
 
-### Enabling/Disabling Deployment of Essential-PKS Clusters
+### Enabling/Disabling Deployment of Essential PKS Clusters
 
 *only system administrator can use `vcd cse ovdc compute-policy ...` commands*
 
@@ -54,9 +58,9 @@ $ vcd cse ovdc compute-policy list ORG_NAME OVDC_NAME
 $ vcd cse ovdc compute-policy remove ORG_NAME OVDC_NAME essential-pks
 ```
 
-### Changing Compute Policy of Essential-PKS Template
+### Changing Essential PKS Template's Compute Policy
 
-System administrators can change or remove Essential-PKS template's compute policy using CSE's template rule functionality. These changes require server startup to take effect.
+System administrators can change or remove Essential PKS template's compute policy using CSE's template rule functionality. These changes require server startup to take effect.
 
 Append this section to CSE config file:
 
