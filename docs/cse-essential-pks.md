@@ -37,16 +37,18 @@ Container Service Extension 2.5 enables orchestration of Kubernetes clusters wit
 1. In the CSE config file, change the value of the key `remote_template_cookbook_url` to  `https://raw.githubusercontent.com/vmware/container-service-extension-templates/essential-pks/template.yaml`. This change enables CSE to view the source of VMware Essential PKS Template.
 2. Create VMware Essential PKS template in VMware vCloud Director using CSE's command-line interface by choosing one of these two ways:
    - Install or re-install CSE 2.5 on VMware vCloud Director to create new VMware Essential PKS template as specified in the CSE config file. The existing templates that were installed by CSE will not be affected.
-     ```$ cse install -c path/to/myconfig.yaml```
-   - Use CSE's template installat command to create new VMware Essential PKS template after CSE is already installed on VMware vCloud Director
-     ```$ cse template install -c path/to/myconfig.yaml TEMPLATE_NAME TEMPLATE_REVISION_NUMBER``` (check VMware Essential PKS Template Details section for parameter values)
-3. In the VMware vCloud Director organization specified in the CSE config file, you should see the VMware Essential PKS template in the catalog (also specified in the CSE config file). Users can now create VMware Essential PKS Kubernetes clusters using CSE `vcd cse cluster create ...` command.
+     - ```$ cse install -c path/to/myconfig.yaml```
+   - Use CSE's template install command to create new VMware Essential PKS template after CSE is already installed on VMware vCloud Director (check VMware Essential PKS Template Details section for parameter values.)
+     - ```$ cse template install -c path/to/myconfig.yaml TEMPLATE_NAME TEMPLATE_REVISION_NUMBER```
+3. In the VMware vCloud Director organization specified in the CSE config file, you should see the VMware Essential PKS template in the catalog (also specified in the CSE config file).
+
+Users can now create VMware Essential PKS Kubernetes clusters using CSE `vcd cse cluster create ...` command. For VMware vCloud Director 10, please follow the section **Deployment of Kubernetes clusters from VMware Essential PKS Template**
 
 ---
 
 ## Deployment of Kubernetes clusters from VMware Essential PKS Template
 
-VMware Essential PKS template created by CSE has a default compute policy **"essential-pks"**, which is used for directing Kubernetes cluster deployments to organization VDCs that have the matching policy. In order to enable Kubernetes cluster deployments using this template, system administrator needs to add the policy to the desired organization VDCs. More information on how CSE uses compute policies can be found [here](TODO)
+VMware Essential PKS template created by CSE has a default compute policy "essential-pks". This policy is used to restrict Kubernetes cluster deployments to organization VDCs that have the matching policy in VMware vCloud Director. In order to enable Kubernetes cluster deployments using this template, system administrator needs to add the policy to the desired organization VDCs. More information on how CSE uses compute policies can be found [here](TODO)
 
 Use CSE's command line interface to run below commands to add the policy to an organization VDC.
 
@@ -63,6 +65,6 @@ $ vcd cse ovdc compute-policy list ORG_NAME OVDC_NAME
 
 *Only system administrator can use `vcd cse ovdc compute-policy ...` commands*
 
-*Limiting access to VMware Essential PKS template is only available on VMware vCloud Director 10. There is no way to limit access to VMware Essential PKS template on older VMware vCloud Director versions*
+*Restricting deployments from VMware Essential PKS template is only available on VMware vCloud Director 10. There is no way to restrict deployments from VMware Essential PKS template on older VMware vCloud Director versions.*
 
 Please refer to [here](TODO) for further information on enabling VMware Essential PKS.
