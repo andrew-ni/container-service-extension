@@ -1,5 +1,9 @@
 # Enabling VMware Essential PKS in Container Service Extension
 
+Container Service Extension 2.5 enables orchestration of Kubernetes clusters with VMware Essential PKS in VMware vCloud Director powered clouds. It comes with the built-in capability to leverage VMware Essential PKS through the Essential PKS template. In order to turn on this capability, please see the section **Creating VMware Essential PKS Template using Container Service Extension**. The details of VMware Essential PKS template used in Container Service Extension are highlighted in the section **VMware Essential PKS Template Details**.
+
+---
+
 ## Container Service Extension (CSE) Reference Links
 
 - [Container Service Extension official docs](https://vmware.github.io/container-service-extension/INTRO.html)
@@ -8,70 +12,55 @@
 
 ---
 
-## Essential PKS Template Details
+## VMware Essential PKS Template Details
 
-| ubuntu-16.04_esspks-1.15_weave-2.5.2 | Revision 1 (latest)                                                                                             |
-| ------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
-| Ubuntu                               | 16.04 (https://cloud-images.ubuntu.com/releases/xenial/release-20180418/ubuntu-16.04-server-cloudimg-amd64.ova) |
-| Docker                               | 18.09.7 (docker-ce=5:18.09.7\~3-0\~ubuntu-xenial)                                                                 |
-| Kubernetes                           | [Essential PKS Kubernetes 1.15.3](https://hub.heptio.com/releases/1-15-release/#1-15-3)                         |
-| Weave (cluster CNI)                  | [2.5.2](https://www.weave.works/docs/net/latest/overview/)                                                      |
-| Default compute policy name          | essential-pks                                                                                                   |
-| Default number of vCPUs              | 2                                                                                                               |
-| Default memory                       | 2048 mb                                                                                                         |
+| Attribute                   | Value                                                                                                           |
+|-----------------------------|-----------------------------------------------------------------------------------------------------------------|
+| Template name               | ubuntu-16.04_esspks-1.15_weave-2.5.2                                                                            |
+| Latest Revision             | 1                                                                                                               |
+| Template details URL        | <https://raw.githubusercontent.com/vmware/container-service-extension-templates/essential-pks/template.yaml>      |
+| Ubuntu version              | [16.04](https://cloud-images.ubuntu.com/releases/xenial/release-20180418/ubuntu-16.04-server-cloudimg-amd64.ova) |
+| Docker version              | 18.09.7 (docker-ce=5:18.09.7\~3-0\~ubuntu-xenial)                                                               |
+| Kubernetes version          | [VMware Essential PKS Kubernetes 1.15.3](https://hub.heptio.com/releases/1-15-release/#1-15-3)                         |
+| Weave version               | [2.5.2](https://www.weave.works/docs/net/latest/overview/)                                                      |
+| Default compute policy name | essential-pks                                                                                                   |
+| Default number of vCPUs     | 2                                                                                                               |
+| Default memory              | 2048 mb                                                                                                         |
 
 ---
 
-## Creating Essential PKS Kubernetes Template using CSE
+## Creating VMware Essential PKS Template using Container Service Extension
 
-*A CSE config file should be created and should contain your vCloud Director details. More CSE config file details can be found [here](https://vmware.github.io/container-service-extension/CSE_ADMIN.html#configfile)*
+*A CSE config file should be created and should contain your VMware vCloud Director details. More CSE config file details can be found [here](https://vmware.github.io/container-service-extension/CSE_ADMIN.html#configfile)*
 
-1. In the CSE config file, change the value of the key `remote_template_cookbook_url` to  `https://raw.githubusercontent.com/vmware/container-service-extension-templates/essential-pks/template.yaml`
-2. Use CSE's command-line interface to create Essential PKS K8s template on vCloud Director
-   - Installing (or re-installing) CSE on vCloud Director will create any new templates if they are specified in the CSE config file
+1. In the CSE config file, change the value of the key `remote_template_cookbook_url` to  `https://raw.githubusercontent.com/vmware/container-service-extension-templates/essential-pks/template.yaml`. This change enables CSE to view the source of VMware Essential PKS Template.
+2. Create VMware Essential PKS template in VMware vCloud Director using CSE's command-line interface by choosing one of these two ways:
+   - Install or re-install CSE 2.5 on VMware vCloud Director to create new VMware Essential PKS template as specified in the CSE config file. The existing templates that were installed by CSE will not be affected.
      ```$ cse install -c path/to/myconfig.yaml```
-   - CSE's template installation command can be used to create new templates once CSE is already installed on vCloud Director
-     ```$ cse template install -c myconfig.yaml ubuntu-16.04_esspks-1.15_weave-2.5.2 1``` (*1 is the template revision number*)
-3. In the vCloud Director organization specified in the CSE config file, you should see the Essential PKS Kubernetes template (**ubuntu-16.04_esspks-1.15_weave-2.5.2_rev1**) in the catalog (also specified in the CSE config file). Users can now create Essential PKS Kubernetes clusters using CSE `vcd cse cluster create ...` command.
+   - Use CSE's template installat command to create new VMware Essential PKS template after CSE is already installed on VMware vCloud Director
+     ```$ cse template install -c path/to/myconfig.yaml TEMPLATE_NAME TEMPLATE_REVISION_NUMBER``` (check VMware Essential PKS Template Details section for parameter values)
+3. In the VMware vCloud Director organization specified in the CSE config file, you should see the VMware Essential PKS template (**ubuntu-16.04_esspks-1.15_weave-2.5.2_rev1**) in the catalog (also specified in the CSE config file). Users can now create VMware Essential PKS Kubernetes clusters using CSE `vcd cse cluster create ...` command.
 
 ---
 
-## Protecting Essential PKS Template
+## Deployment of Kubernetes clusters from VMware Essential PKS Template
 
-Essential PKS template has a default compute policy named **essential-pks**. Users will not be able to deploy templates to org VDCs that do not have the specified compute policy assigned. System administrators can assign compute policies to org VDCs via CSE's command-line interface. More information on how CSE uses compute policies can be found [here](TODO)
+VMware Essential PKS template created by CSE has a default compute policy **"essential-pks"**, which is used for directing Kubernetes cluster deployments to organization VDCs that have the matching policy. In order to enable Kubernetes cluster deployments using this template, system administrator needs to add the policy to the desired organization VDCs. More information on how CSE uses compute policies can be found [here](TODO)
 
-### Enabling/Disabling Deployment of Essential PKS Clusters
-
-*Only system administrator can use `vcd cse ovdc compute-policy ...` commands*
+Use CSE's command line interface to run below commands to add the policy to an organization VDC.
 
 ```bash
 # must be logged in as system administrator
-$ vcd login IP system administrator
+$ vcd login VCD_IP system administrator
 
 # assign 'essential-pks' compute policy to your org VDC
 $ vcd cse ovdc compute-policy add ORG_NAME OVDC_NAME essential-pks
 
-# confirm that the compute policy is assigned
+# confirm that the compute policy is assigned to your org VDC
 $ vcd cse ovdc compute-policy list ORG_NAME OVDC_NAME
-
-# remove 'essential-pks' compute policy from an org VDC (to disable deployments)
-$ vcd cse ovdc compute-policy remove ORG_NAME OVDC_NAME essential-pks
 ```
 
-### Changing Essential PKS Template's Compute Policy
+*Limiting access to VMware Essential PKS template is only available on VMware vCloud Director 10. There is no way to limit access to VMware Essential PKS template on older VMware vCloud Director versions*
+*Only system administrator can use `vcd cse ovdc compute-policy ...` commands*
 
-System administrators can change or remove Essential PKS template's compute policy using CSE's template rule functionality. These changes require server startup to take effect.
-
-Append this section to CSE config file:
-
-```yaml
-template_rules:
-- name: Rule1 # name is only for error printing purposes
-  target:
-    name: ubuntu-16.04_esspks-1.15_weave-2.5.2
-    revision: 1
-  action:
-    compute_policy: 'my-compute-policy' # if this value is '', compute_policy will be removed instead
-```
-
-*if compute_policy key is omitted, the template's default compute policy will be used*
+Please refer to [here](TODO) for further information on enabling VMware Essential PKS.
