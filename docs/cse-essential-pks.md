@@ -38,7 +38,7 @@ Container Service Extension 2.5 enables orchestration of Kubernetes clusters wit
 2. Create VMware Essential PKS template in VMware vCloud Director using CSE's command-line interface by choosing one of these two ways:
    - Install or re-install CSE 2.5 on VMware vCloud Director to create new VMware Essential PKS template as specified in the CSE config file. The existing templates that were installed by CSE will not be affected.
      - ```$ cse install -c path/to/myconfig.yaml```
-   - Use CSE's template install command to create new VMware Essential PKS template after CSE is already installed on VMware vCloud Director (check VMware Essential PKS Template Details section for parameter values.)
+   - Use CSE's template install command to create new VMware Essential PKS template after CSE is already installed on VMware vCloud Director (check VMware Essential PKS Template Details section for parameter values).
      - ```$ cse template install -c path/to/myconfig.yaml TEMPLATE_NAME TEMPLATE_REVISION_NUMBER```
 3. In the VMware vCloud Director organization specified in the CSE config file, you should see the VMware Essential PKS template in the catalog (also specified in the CSE config file).
 
