@@ -60,7 +60,8 @@ $ vcd cse ovdc compute-policy add ORG_NAME OVDC_NAME essential-pks
 $ vcd cse ovdc compute-policy list ORG_NAME OVDC_NAME
 ```
 
-*Limiting access to VMware Essential PKS template is only available on VMware vCloud Director 10. There is no way to limit access to VMware Essential PKS template on older VMware vCloud Director versions*
 *Only system administrator can use `vcd cse ovdc compute-policy ...` commands*
+
+*Limiting access to VMware Essential PKS template is only available on VMware vCloud Director 10. There is no way to limit access to VMware Essential PKS template on older VMware vCloud Director versions*
 
 Please refer to [here](TODO) for further information on enabling VMware Essential PKS.
