@@ -14,18 +14,19 @@ Container Service Extension 2.5 enables orchestration of Kubernetes clusters wit
 
 ## VMware Essential PKS Template Details
 
-| Attribute                   | Value                                                                                                           |
-|-----------------------------|-----------------------------------------------------------------------------------------------------------------|
-| Template name               | ubuntu-16.04_esspks-1.15_weave-2.5.2                                                                            |
-| Latest Revision             | 1                                                                                                               |
-| Template details URL        | <https://raw.githubusercontent.com/vmware/container-service-extension-templates/essential-pks/template.yaml>      |
+| Attribute                   | Value                                                                                                            |
+|-----------------------------|------------------------------------------------------------------------------------------------------------------|
+| Template name               | ubuntu-16.04_esspks-1.15_weave-2.5.2                                                                             |
+| Latest Revision             | 1                                                                                                                |
+| Catalog item name           | ubuntu-16.04_esspks-1.15_weave-2.5.2_rev1                                                                        |
+| Template details URL        | <https://raw.githubusercontent.com/vmware/container-service-extension-templates/essential-pks/template.yaml>     |
 | Ubuntu version              | [16.04](https://cloud-images.ubuntu.com/releases/xenial/release-20180418/ubuntu-16.04-server-cloudimg-amd64.ova) |
-| Docker version              | 18.09.7 (docker-ce=5:18.09.7\~3-0\~ubuntu-xenial)                                                               |
-| Kubernetes version          | [VMware Essential PKS Kubernetes 1.15.3](https://hub.heptio.com/releases/1-15-release/#1-15-3)                         |
-| Weave version               | [2.5.2](https://www.weave.works/docs/net/latest/overview/)                                                      |
-| Default compute policy name | essential-pks                                                                                                   |
-| Default number of vCPUs     | 2                                                                                                               |
-| Default memory              | 2048 mb                                                                                                         |
+| Docker version              | 18.09.7 (docker-ce=5:18.09.7\~3-0\~ubuntu-xenial)                                                                |
+| Kubernetes version          | [VMware Essential PKS Kubernetes 1.15.3](https://hub.heptio.com/releases/1-15-release/#1-15-3)                   |
+| Weave version               | [2.5.2](https://www.weave.works/docs/net/latest/overview/)                                                       |
+| Default compute policy name | essential-pks                                                                                                    |
+| Default number of vCPUs     | 2                                                                                                                |
+| Default memory              | 2048 mb                                                                                                          |
 
 ---
 
@@ -39,7 +40,7 @@ Container Service Extension 2.5 enables orchestration of Kubernetes clusters wit
      ```$ cse install -c path/to/myconfig.yaml```
    - Use CSE's template installat command to create new VMware Essential PKS template after CSE is already installed on VMware vCloud Director
      ```$ cse template install -c path/to/myconfig.yaml TEMPLATE_NAME TEMPLATE_REVISION_NUMBER``` (check VMware Essential PKS Template Details section for parameter values)
-3. In the VMware vCloud Director organization specified in the CSE config file, you should see the VMware Essential PKS template (**ubuntu-16.04_esspks-1.15_weave-2.5.2_rev1**) in the catalog (also specified in the CSE config file). Users can now create VMware Essential PKS Kubernetes clusters using CSE `vcd cse cluster create ...` command.
+3. In the VMware vCloud Director organization specified in the CSE config file, you should see the VMware Essential PKS template in the catalog (also specified in the CSE config file). Users can now create VMware Essential PKS Kubernetes clusters using CSE `vcd cse cluster create ...` command.
 
 ---
 
