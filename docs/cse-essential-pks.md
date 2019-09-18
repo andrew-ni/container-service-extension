@@ -42,7 +42,7 @@ Container Service Extension 2.5 enables orchestration of Kubernetes clusters wit
      - ```$ cse template install -c path/to/myconfig.yaml TEMPLATE_NAME TEMPLATE_REVISION_NUMBER```
 3. In the VMware vCloud Director organization specified in the CSE config file, you should see the VMware Essential PKS template in the catalog (also specified in the CSE config file).
 
-Users can now create VMware Essential PKS Kubernetes clusters using CSE `vcd cse cluster create ...` command. For VMware vCloud Director 10, please follow the section **Deployment of Kubernetes clusters from VMware Essential PKS Template**
+Users can now create VMware Essential PKS Kubernetes clusters using CSE. For VMware vCloud Director 10, please follow the section **Deployment of Kubernetes clusters from VMware Essential PKS Template**
 
 ---
 
